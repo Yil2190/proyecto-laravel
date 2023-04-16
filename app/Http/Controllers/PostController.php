@@ -11,6 +11,15 @@ use App\Models\Category;
 
 class PostController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ver-post | crear-post | editar-post | borrar-post',['only'=>['index']]);
+        $this->middleware('permission:crear-post',['only'=>['create','store']]);
+        $this->middleware('permission:editar-post',['only'=>['edit','update']]);
+        $this->middleware('permission:borrar-post',['only'=>['destroy']]);
+
+    }
+
     /**
      * Display a listing of the resource.
      */
